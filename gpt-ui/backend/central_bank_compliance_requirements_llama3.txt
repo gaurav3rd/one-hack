@@ -1,0 +1,33 @@
+# 🏦 Llama3-Aware Compliance Guidelines for Digital Wallet
+
+These compliance checks are based on your app's current schema:
+
+### Database Tables:
+- `query_app_user`: Stores user info (id, username, email)
+- `query_app_transaction`: Stores each transaction (user_id, amount, date)
+- `query_app_transactionhistorylog`: Logs changes to transactions
+
+---
+
+## 1. KYC & Identity Checks
+**Goal**: Ensure all users have valid identification and contact info
+
+- ✅ All users must have a **valid, non-null email** address  
+  ➤ SQL: `SELECT COUNT(*) FROM query_app_user WHERE email IS NULL OR email = '';`
+
+- ✅ No duplicate usernames should exist  
+  ➤ SQL: `SELECT username, COUNT(*) FROM query_app_user GROUP BY username HAVING COUNT(*) > 1;`
+
+---
+
+## 2. Transaction Volume & Risk Limits
+**Goal**: Monitor and restrict potentially risky financial behavior
+
+- ✅ Users should not exceed $10,000 in transactions per day  
+  ➤ SQL:  
+  ```sql
+  SELECT user_id, SUM(amount) AS daily_total  
+  FROM query_app_transaction  
+  WHERE transaction_date = CURRENT_DATE  
+  GROUP BY user_id  
+  HAVING daily_total > 10000;
