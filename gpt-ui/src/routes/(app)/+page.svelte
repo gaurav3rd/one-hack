@@ -216,18 +216,30 @@
 			prompt = '';
 			files = [];
 
-			if (selectedAction === 'Suggestions') {
-				console.log('Suggestions mode selected');
-				// Add logic for Suggestions mode
-			} else if (selectedAction === 'Generation') {
-				console.log('Generation mode selected');
-				// Add logic for Generation mode
-			} else {
-				console.log('Normal Flow or other mode selected');
-				// Add logic for other modes
 
-			await sendPrompt(userPrompt, userMessageId);
-			}
+			if (selectedAction === 'Suggestions') {
+  ApiProvider().get('/lookup', prompt)
+    .then(data => {
+      sendPrompt(`${data} Convert this data into report format with tables. Don't put any other text except the report.`, userMessageId);
+    })
+    .catch(error => {
+      toast.error('No suggestions for this data found');
+    });
+} else if (selectedAction === 'Generation') {
+  var sql_query = sendPrompt(`${data} Convert this data into SQL query for the context that you were trained for. The data was provided earlier. Just return the SQL queries. Nothing else. ${userPrompt}`, userMessageId);
+
+  ApiProvider().post('/lookup', prompt)
+    .then(data => {
+      sendPrompt(`${data} Convert this data into report format with tables. Don't put any other text except the report.`, userMessageId);
+    })
+    .catch(error => {
+      console.error('Error during POST /lookup:', error);
+    });
+
+  // Add logic for Generation mode
+} else {
+  await sendPrompt(userPrompt, userMessageId);
+}
 
 			// Send prompt
 		}

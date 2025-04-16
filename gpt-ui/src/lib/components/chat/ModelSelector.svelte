@@ -10,7 +10,7 @@
 	import toast from 'svelte-french-toast';
 
 	export let selectedModels = [''];
-	export let hackMethods = ['Suggestions', 'Generation'];
+	export let hackMethods = ['Suggestions', 'Generation', 'Normal Flow'];
 	export let disabled = false;
 
 	// Create a writable store for the selected action
