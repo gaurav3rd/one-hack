@@ -3,9 +3,14 @@
 	import { models, showSettings, settings, user } from '$lib/stores';
 	import { onMount, tick } from 'svelte';
 	import toast from 'svelte-french-toast';
+	import { writable } from 'svelte/store'; // Import writable for global state
 
 	export let selectedModels = [''];
+	export let hackMethods = ['Suggestions', 'Generation'];
 	export let disabled = false;
+
+	// Create a writable store for the selected action
+	export const selectedAction = writable('Suggestions');
 
 	const saveDefaultModel = async () => {
 		const hasEmptyModel = selectedModels.filter((it) => it === '');
@@ -29,6 +34,19 @@
 		);
 	}
 </script>
+
+<div class="flex flex-col my-6">
+    <label for="action-select" class="text-sm font-semibold text-gray-700">Select an Action:</label>
+    <select
+        id="action-select"
+        class="outline-none bg-transparent text-lg font-semibold rounded-lg block w-full placeholder-gray-400"
+        bind:value={$selectedAction}
+    >
+        {#each hackMethods as method}
+            <option value={method}>{method}</option>
+        {/each}
+    </select>
+</div>
 
 <div class="flex flex-col my-2">
 	{#each selectedModels as selectedModel, selectedModelIdx}
@@ -132,6 +150,20 @@
 			{/if}
 		</div>
 	{/each}
+</div>
+
+<!-- New dropdown for selecting Suggestions or Generation -->
+<div class="flex flex-col my-2">
+	<label for="action-select" class="text-sm font-semibold text-gray-700">Select an Action:</label>
+	<select
+		id="action-select"
+		class="outline-none bg-transparent text-lg font-semibold rounded-lg block w-full placeholder-gray-400"
+		bind:value={$selectedAction}
+	>
+		{#each hackMethods as method}
+			<option value={method}>{method}</option>
+		{/each}
+	</select>
 </div>
 
 <div class="text-left mt-1.5 text-xs text-gray-500">

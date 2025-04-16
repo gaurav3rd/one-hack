@@ -20,7 +20,7 @@ export default ApiProvider;
 
 const oneHackGetSuggestions = async () => {
   try {
-    const data = await ApiProvider().get('/suggestions');
+    const data = await ApiProvider().get('/lookup');
     return data; // returns the json response
   } catch (error) {
     console.error('Error fetching suggestions:', error);
@@ -30,7 +30,7 @@ const oneHackGetSuggestions = async () => {
 
 const oneHackGetGeneratedForm = async () => {
   try {
-    const data = await ApiProvider().get('/lookup');
+    const data = await ApiProvider().post('/lookup');
     return data; // returns the json response
   } catch (error) {
     console.error('Error fetching generated form:', error);
