@@ -18,7 +18,7 @@
 	let show = false;
 	let navElement;
 
-	let title: string = 'Ollama Web UI';
+	let title: string = 'Khalti AI Chat';
 	let search = '';
 
 	let chatDeleteId = null;

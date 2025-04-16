@@ -66,10 +66,51 @@
 			console.log(localModelfiles);
 		}
 	});
+
+	// Add a variable to track the selected option
+	let queryType: string = 'suggestion'; // Default selection
 </script>
 
 <div class="min-h-screen w-full flex justify-center dark:text-white">
-	<div class=" py-2.5 flex flex-col justify-between w-full">
+	<div class="py-2.5 flex flex-col justify-between w-full">
+		<!-- Sidebar Section -->
+		<div class="sidebar bg-gray-100 dark:bg-gray-800 p-4">
+			<!-- Search bar -->
+			<div class="search-bar mb-4">
+				<input
+					type="text"
+					placeholder="Search..."
+					class="w-full p-2 rounded border dark:border-gray-600 dark:bg-gray-700"
+				/>
+			</div>
+
+			<!-- Radio Button Selector -->
+			<div class="radio-selector mt-4">
+				<h3 class="text-lg font-bold mb-2">Options</h3>
+				<label class="flex items-center space-x-2 mb-2">
+					<input
+						type="radio"
+						name="queryType"
+						value="suggestion"
+						bind:group={queryType}
+						class="accent-blue-500"
+					/>
+					<span>Get Suggestions</span>
+				</label>
+				<label class="flex items-center space-x-2">
+					<input
+						type="radio"
+						name="queryType"
+						value="report"
+						bind:group={queryType}
+						class="accent-blue-500"
+					/>
+					<span>Generate Report</span>
+				</label>
+			</div>
+		</div>
+
+		<!-- Main Content Section -->
 		<div class="max-w-2xl mx-auto w-full px-3 md:px-0 my-10">
 			<div class=" text-2xl font-semibold mb-6">My Modelfiles</div>
 
@@ -383,3 +424,16 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.sidebar {
+		width: 250px;
+	}
+	.radio-selector label {
+		display: flex;
+		align-items: center;
+	}
+	.radio-selector input[type='radio'] {
+		accent-color: #007bff;
+	}
+</style>
