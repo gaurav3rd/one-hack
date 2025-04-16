@@ -5,6 +5,7 @@
 	import { onMount, tick } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import {selectedAction } from 	'$lib/components/chat/ModelSelector.svelte';
 
 	import {
 		models,
@@ -214,8 +215,20 @@
 			prompt = '';
 			files = [];
 
-			// Send prompt
+			if (selectedAction === 'Suggestions') {
+				console.log('Suggestions mode selected');
+				// Add logic for Suggestions mode
+			} else if (selectedAction === 'Generation') {
+				console.log('Generation mode selected');
+				// Add logic for Generation mode
+			} else {
+				console.log('Normal Flow or other mode selected');
+				// Add logic for other modes
+
 			await sendPrompt(userPrompt, userMessageId);
+			}
+
+			// Send prompt
 		}
 	};
 

@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" >
 	import { setDefaultModels } from '$lib/apis/configs';
 	import { models, showSettings, settings, user } from '$lib/stores';
 	import { onMount, tick } from 'svelte';
@@ -11,6 +11,7 @@
 
 	// Create a writable store for the selected action
 	export const selectedAction = writable('Suggestions');
+	
 
 	const saveDefaultModel = async () => {
 		const hasEmptyModel = selectedModels.filter((it) => it === '');
@@ -35,18 +36,6 @@
 	}
 </script>
 
-<div class="flex flex-col my-6">
-    <label for="action-select" class="text-sm font-semibold text-gray-700">Select an Action:</label>
-    <select
-        id="action-select"
-        class="outline-none bg-transparent text-lg font-semibold rounded-lg block w-full placeholder-gray-400"
-        bind:value={$selectedAction}
-    >
-        {#each hackMethods as method}
-            <option value={method}>{method}</option>
-        {/each}
-    </select>
-</div>
 
 <div class="flex flex-col my-2">
 	{#each selectedModels as selectedModel, selectedModelIdx}
