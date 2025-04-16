@@ -37,6 +37,7 @@
 	import ModelSelector from '$lib/components/chat/ModelSelector.svelte';
 	import Navbar from '$lib/components/layout/Navbar.svelte';
 	import { RAGTemplate } from '$lib/utils/rag';
+	import ApiProvider from './modelfiles/provider/api_provider';
 
 	let stopResponseFlag = false;
 	let autoScroll = true;

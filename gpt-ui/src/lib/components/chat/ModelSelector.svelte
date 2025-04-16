@@ -1,16 +1,19 @@
-<script lang="ts" >
+<script context="module">
+  import {writable} from 'svelte/store'
+	export const selectedAction = writable('Suggestions');
+</script>
+
+<script lang="ts">
 	import { setDefaultModels } from '$lib/apis/configs';
 	import { models, showSettings, settings, user } from '$lib/stores';
 	import { onMount, tick } from 'svelte';
 	import toast from 'svelte-french-toast';
-	import { writable } from 'svelte/store'; // Import writable for global state
 
 	export let selectedModels = [''];
 	export let hackMethods = ['Suggestions', 'Generation'];
 	export let disabled = false;
 
 	// Create a writable store for the selected action
-	export const selectedAction = writable('Suggestions');
 	
 
 	const saveDefaultModel = async () => {
