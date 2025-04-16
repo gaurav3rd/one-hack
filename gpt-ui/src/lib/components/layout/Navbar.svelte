@@ -8,7 +8,7 @@
 	import ShareChatModal from '../chat/ShareChatModal.svelte';
 
 	export let initNewChat: Function;
-	export let title: string = 'Ollama Web UI';
+	export let title: string = 'Khalti AI Chat';
 	export let shareEnabled: boolean = false;
 
 	export let tags = [];
@@ -110,7 +110,7 @@
 			</div>
 			<div class=" flex-1 self-center font-medium line-clamp-1">
 				<div>
-					{title != '' ? title : 'Ollama Web UI'}
+					{title != '' ? title : 'Khalti AI Chat'}
 				</div>
 			</div>
 
